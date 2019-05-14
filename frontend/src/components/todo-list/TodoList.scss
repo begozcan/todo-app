@@ -1,0 +1,35 @@
+.todo-list-container {
+  width: 60%;
+  height: 75vh;
+  background: #f8f8f8;
+  margin: 10vh auto;
+  border-radius: 25px;
+  overflow: auto;
+  text-align: center;
+
+  .header {
+    padding-top: 1rem;
+
+    .filter-dropdown {
+      float: left;
+      margin-top: 0.75rem;
+      margin-left: 2rem;
+    }
+
+    h1 {
+      display: inline-block;
+    }
+
+    .add-icon {
+      float: right;
+      font-size: 2rem;
+      margin-top: 0.5rem;
+      margin-right: 2rem;
+      cursor: pointer;
+
+      &:hover {
+        color: #ffd00f;
+      }
+    }
+  }
+}
