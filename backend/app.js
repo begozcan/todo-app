@@ -1,9 +1,23 @@
-import cookieParser from "cookie-parser";
+import cookieParser from 'cookie-parser';
 import express from 'express';
+import mongoose from 'mongoose';
 import logger from 'morgan';
 import path from 'path';
 import indexRouter from './routes/index';
-import userRouter from './routes/users';
+import todoItemRouter from './routes/todo';
+
+// Set up default mongoose connection
+const mongoDB = 'mongodb://127.0.0.1/todo-app';
+mongoose.connect(mongoDB, {useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false});
+
+// Get Mongoose to use the global promise library
+mongoose.Promise = global.Promise;
+
+// Get the default connection
+const db = mongoose.connection;
+
+// Bind connection to error event (to get notification of connection errors)
+db.on('error', console.error.bind(console, 'MongoDB connection error: '));
 
 // CORS middleware
 const allowCrossDomain = function(req, res, next) {
@@ -24,6 +38,6 @@ app.use(express.static(path.join(__dirname, '..', 'frontend/build')));
 app.use(allowCrossDomain);
 
 app.use('/', indexRouter);
-app.use('/api/user', userRouter);
+app.use('/api/todo', todoItemRouter);
 
 module.exports = app;

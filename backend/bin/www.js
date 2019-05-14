@@ -1,13 +1,10 @@
 #!/usr/bin/env node
 
-/**
- * Module dependencies.
- */
-const app = require('../app');
-const debug = require('debug')('backend:app');
-const http = require('http');
-const mongoose = require('mongoose');
+import debug0 from 'debug';
+import http from 'http';
+import app from '../app';
 
+const debug = debug0('backend:app');
 /**
  * Get port from environment and store in Express.
  */
@@ -86,16 +83,3 @@ function onListening() {
       : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
-
-// Set up default mongoose connection
-const mongoDB = 'mongodb://127.0.0.1/todo-app';
-mongoose.connect(mongoDB, {useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false});
-
-// Get Mongoose to use the global promise library
-mongoose.Promise = global.Promise;
-
-// Get the default connection
-const db = mongoose.connection;
-
-// Bind connection to error event (to get notification of connection errors)
-db.on('error', console.error.bind(console, 'MongoDB connection error: '));
