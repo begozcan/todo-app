@@ -2,4 +2,14 @@
   padding: 1rem 2rem;
   text-align: left;
   border-bottom: 1px solid #0000001a;
+
+  .delete-icon {
+    float: right;
+    cursor: pointer;
+    margin-top: 0.25rem;
+
+    &:hover {
+      color: #ffd00f;
+    }
+  }
 }

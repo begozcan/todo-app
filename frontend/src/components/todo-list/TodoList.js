@@ -1,9 +1,28 @@
 import {Dropdown, Icon, Menu} from 'antd';
 import * as React from 'react';
-import {TodoItem} from '../todo-item/TodoItem';
+import {connect} from 'react-redux';
+import {fetchTodos} from '../../actions/todo';
+import AddTodoForm from '../add-todo-form/AddTodoForm';
+import TodoItem from '../todo-item/TodoItem';
 import './TodoList.scss';
 
-export class TodoList extends React.Component {
+class TodoList extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {addTodoFormVisible: false};
+
+        this.toggleAddTodoFormVisible = this.toggleAddTodoFormVisible.bind(this);
+    }
+
+    componentDidMount() {
+        this.props.fetchTodos();
+    }
+
+    toggleAddTodoFormVisible() {
+        this.setState({addTodoFormVisible: !this.state.addTodoFormVisible})
+    }
+
     render() {
         const filters = (
             <Menu>
@@ -15,6 +34,10 @@ export class TodoList extends React.Component {
             </Menu>
         );
 
+        const todos = this.props.todos.map(todo => {
+            return <TodoItem todo={todo} isComplete={todo.isComplete} key={todo._id}/>
+        });
+
         return (
             <div className="todo-list-container">
                 <div className="header">
@@ -24,17 +47,26 @@ export class TodoList extends React.Component {
                         </a>
                     </Dropdown>
                     <h1>To-Do List</h1>
-                    <Icon type="plus" className="add-icon"/>
+                    <Icon type="plus" className="add-icon" onClick={this.toggleAddTodoFormVisible}/>
                 </div>
                 <hr/>
                 <div className="todo-list">
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
-                    <TodoItem/>
+                    {this.state.addTodoFormVisible && <AddTodoForm/>}
+                    {todos}
                 </div>
             </div>
         );
     }
 }
+
+function mapStateToProps(state) {
+    return {todos: state.todos};
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        fetchTodos: () => dispatch(fetchTodos())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
