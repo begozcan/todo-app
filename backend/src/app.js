@@ -6,7 +6,7 @@ import path from 'path';
 import todoItemRouter from './routes/todo';
 
 // Set up default mongoose connection
-const mongoDB = 'mongodb://127.0.0.1/todo-app';
+const mongoDB = process.env.MONGO_URL || 'mongodb://127.0.0.1/todo-app';
 mongoose.connect(mongoDB, {useNewUrlParser: true, useCreateIndex: true, useFindAndModify: false});
 
 // Get Mongoose to use the global promise library
