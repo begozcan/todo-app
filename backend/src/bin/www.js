@@ -8,7 +8,7 @@ const debug = debug0('backend:app');
 /**
  * Get port from environment and store in Express.
  */
-let port = normalizePort(process.env.PORT || '8080');
+let port = normalizePort(process.env.PORT || '80');
 app.set('port', port);
 
 /**

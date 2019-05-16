@@ -3,7 +3,6 @@ import express from 'express';
 import mongoose from 'mongoose';
 import logger from 'morgan';
 import path from 'path';
-import indexRouter from './routes/index';
 import todoItemRouter from './routes/todo';
 
 // Set up default mongoose connection
@@ -34,10 +33,9 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, '..', 'frontend/build')));
+app.use(express.static(path.join(__dirname, '..', '..', 'frontend/build')));
 app.use(allowCrossDomain);
 
-app.use('/', indexRouter);
 app.use('/api/todo', todoItemRouter);
 
 module.exports = app;
