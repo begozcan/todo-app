@@ -8,7 +8,7 @@ const debug = debug0('backend:app');
 /**
  * Get port from environment and store in Express.
  */
-let port = normalizePort(process.env.PORT || '80');
+let port = normalizePort(process.env.PORT || '8080');
 app.set('port', port);
 
 /**
@@ -20,7 +20,7 @@ const server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(process.env.port || 80);
+server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 
