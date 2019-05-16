@@ -1,11 +1,11 @@
 import {Checkbox, Icon} from 'antd';
+import * as moment from 'moment';
 import * as React from 'react';
 import {connect} from 'react-redux';
 import {changeTodoStatus, removeTodo} from '../../actions/todo';
 import './TodoItem.scss';
 
 class TodoItem extends React.Component {
-
     constructor(props) {
         super(props);
 
@@ -31,6 +31,8 @@ class TodoItem extends React.Component {
                     {todo.title}
                 </Checkbox>
                 <Icon type="delete" className="delete-icon" onClick={this.onDeleteClick}/>
+                {todo.dueDate &&
+                <p className="due-date">Due: {moment(todo.dueDate).format('YYYY-MM-DD HH:mm')}</p>}
             </div>
         );
     }

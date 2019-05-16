@@ -13,11 +13,13 @@
     .filter-dropdown {
       float: left;
       margin-top: 0.75rem;
-      margin-left: 2rem;
+      margin-left: 1rem;
+      width: 5rem;
     }
 
     h1 {
       display: inline-block;
+      margin-right: 2rem;
     }
 
     .add-icon {
@@ -30,6 +32,21 @@
       &:hover {
         color: #ffd00f;
       }
+    }
+  }
+
+  .no-data-container {
+    padding-top: 15%;
+
+    .no-data-icon {
+      color: #0000001a;
+      font-size: 10em;
+    }
+
+    p  {
+      color: #00000025;
+      font-weight: bold;
+      font-size: 1.4em;
     }
   }
 }

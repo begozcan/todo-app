@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {ADD_TODO, CHANGE_TODO_STATUS, FETCH_TODOS, REMOVE_TODO} from './types';
+import {ADD_TODO, CHANGE_TODO_STATUS, FETCH_TODOS, REMOVE_TODO, SHOW_ADD_FORM} from './types';
 
 export function fetchTodos() {
     return dispatch => {
@@ -11,11 +11,12 @@ export function fetchTodos() {
     }
 }
 
-export function addTodo(title) {
+export function addTodo(title, dueDate) {
     return dispatch => {
-        axios.post('/api/todo', {title})
+        axios.post('/api/todo', {title: title, dueDate: dueDate})
             .then(resp => {
                 dispatch({type: ADD_TODO, payload: resp.data});
+                dispatch({type: SHOW_ADD_FORM, payload: false});
             });
     }
 }
@@ -31,7 +32,7 @@ export function changeTodoStatus(id, isComplete) {
 
 export function removeTodo(id) {
     return dispatch => {
-        axios.delete('/api/todo', {params: {_id: id}})
+        axios.delete('/api/todo', {data: {_id: id}})
             .then(() => {
                 dispatch({type: REMOVE_TODO, payload: {id}});
             });
