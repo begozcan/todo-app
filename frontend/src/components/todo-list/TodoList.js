@@ -1,6 +1,7 @@
 import {Dropdown, Icon, Menu} from 'antd';
 import moment from 'moment';
 import * as React from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {connect} from 'react-redux';
 import {fetchTodos} from '../../actions/todo';
 import {toggleShowAddForm} from '../../actions/ui';
@@ -70,7 +71,7 @@ class TodoList extends React.Component {
                 <Menu.Item onClick={() => this.setCurrentFilter(FILTER_TODAY)}>Today</Menu.Item>
                 <Menu.Item onClick={() => this.setCurrentFilter(FILTER_COMPLETE)}>Complete</Menu.Item>
                 <Menu.Item onClick={() => this.setCurrentFilter(FILTER_OVERDUE)}>Overdue</Menu.Item>
-                <Menu.Divider/>
+                <Menu.Divider />
                 <Menu.Item onClick={() => this.setCurrentFilter(FILTER_ALL)}>Clear</Menu.Item>
             </Menu>
         );
@@ -92,9 +93,20 @@ class TodoList extends React.Component {
                 </div>
                 <hr/>
                 <div className="todo-list">
-                    {this.props.showAddForm && <AddTodoForm/>}
+                    <ReactCSSTransitionGroup
+                        transitionName="slide"
+                        transitionEnterTimeout={300}
+                        transitionLeave={false}>
+                        {this.props.showAddForm && <AddTodoForm/>}
+                    </ReactCSSTransitionGroup>
 
-                    {todos.length > 0 ? todos :
+                    {todos.length > 0 ?
+                        <ReactCSSTransitionGroup
+                            transitionName="fade"
+                            transitionEnterTimeout={300}
+                            transitionLeaveTimeout={300}>
+                            {todos}
+                        </ReactCSSTransitionGroup> :
                         <div className="no-data-container">
                             <Icon type="inbox" className="no-data-icon"/>
                             <p>No items</p>

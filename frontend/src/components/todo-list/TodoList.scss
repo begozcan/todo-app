@@ -50,3 +50,40 @@
     }
   }
 }
+
+// ANIMATIONS
+.fade-enter {
+  opacity: 0.01;
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in-out;
+}
+
+.fade-leave {
+  opacity: 1;
+}
+
+.fade-leave.fade-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in-out;
+}
+
+.slide-enter {
+  transform: translateY(-35%);
+}
+
+.slide-enter.slide-enter-active {
+  transform: translateY(0%);
+  transition: transform 300ms ease-in-out;
+}
+
+.slide-leave {
+  opacity: 1;
+}
+
+.slide-leave.slide-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in-out;
+}
